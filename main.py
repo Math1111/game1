@@ -1,4 +1,4 @@
-import tkinter
+from tkinter import *
 
 def set_status(text, color='black'):
     pass
