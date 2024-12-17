@@ -1,5 +1,4 @@
 from tkinter import *
-import main
 from pickle import load, dump
 
 def pause_toggle():
@@ -30,28 +29,28 @@ def menu_enter(canvas):
         game_exit()
     menu_hide(canvas)
 
-def game_new():
+def game_new(canvas):
     # menu_toggle()
-    main.x1, main.y1 = 50, 50
-    main.x2, main.y2 = main.x1, main.y1 + main.player_size + 100
-    main.canvas.coords(main.player1, main.x1, main.y1, main.x1 + main.player_size,
-                  main.y1 + main.player_size)
-    main.canvas.coords(main.player2, main.x2, main.y2, main.x2 + main.player_size,
-                  main.y2 + main.player_size)
+    x1, y1 = 50, 50
+    x2, y2 = x1, y1 + player_size + 100
+    canvas.coords(player1, x1, y1, x1 + player_size,
+                  y1 + player_size)
+    canvas.coords(player2, x2, y2, x2 + player_size,
+                  y2 + player_size)
     print('Начинаем новую игру')
 
 def game_resume():
     print('Возобновляем старую игру')
 
-def game_save():
+def game_save(canvas):
     print('Сохраняем игру')
     # 1
-    main.x1 =  main.canvas.coords(main.player1)[0]
-    main.x2 =  main.canvas.coords(main.player2)[0]
+    x1 =  canvas.coords(player1)[0]
+    x2 =  canvas.coords(player2)[0]
     data = [x1, x2]
     with open('save.dat', 'wb') as f:
         dump(data, f)
-        main.set_status('Сохранено', color='yellow')
+        set_status('Сохранено', color='yellow')
 
 def game_load(canvas):
     print('Загружаем игру')
@@ -60,11 +59,11 @@ def game_load(canvas):
     with open('save.dat', 'rb') as f:
         data = load(f)
         x1, x2 = data
-        canvas.coords(main.player1, main.x1, main.y1, main.x1 + main.player_size,
-                      main.y1 + main.player_size)
-        canvas.coords(main.player2, main.x2, main.y2, main.x2 + main.player_size,
-                      main.y2 + main.player_size)
-        main.set_status('Загружено', color='yellow')
+        canvas.coords(player1, x1, y1, x1 + player_size,
+                      y1 + player_size)
+        canvas.coords(player2, x2, y2, x2 + player_size,
+                      y2 + player_size)
+        set_status('Загружено', color='yellow')
 
 def menu_up(canvas):
     global menu_current_index
