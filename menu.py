@@ -16,33 +16,33 @@ menu_options_id = []
 
 pause = False
 
-def menu_enter(canvas):
+def menu_enter(canvas, player1, player2):
     if menu_current_index == 0:
         game_resume()
     elif menu_current_index == 1:
-        game_new()
+        game_new(canvas, player1, player2)
     elif menu_current_index == 2:
-        game_save()
+        game_save(canvas, player1, player2)
     elif menu_current_index == 3:
-        game_load(canvas)
+        game_load(canvas, player1, player2)
     elif menu_current_index == 4:
         game_exit()
     menu_hide(canvas)
 
-def game_new(canvas):
+def game_new(canvas, player1, player2):
     # menu_toggle()
     x1, y1 = 50, 50
-    x2, y2 = x1, y1 + player_size + 100
-    canvas.coords(player1, x1, y1, x1 + player_size,
-                  y1 + player_size)
-    canvas.coords(player2, x2, y2, x2 + player_size,
-                  y2 + player_size)
+    x2, y2 = x1, y1 + 100 + 100
+    canvas.coords(player1, x1, y1, x1 + 100,
+                  y1 + 100)
+    canvas.coords(player2, x2, y2, x2 + 100,
+                  y2 + 100)
     print('Начинаем новую игру')
 
 def game_resume():
     print('Возобновляем старую игру')
 
-def game_save(canvas):
+def game_save(canvas,player1,player2):
     print('Сохраняем игру')
     # 1
     x1 =  canvas.coords(player1)[0]
@@ -50,20 +50,19 @@ def game_save(canvas):
     data = [x1, x2]
     with open('save.dat', 'wb') as f:
         dump(data, f)
-        set_status('Сохранено', color='yellow')
+        print('Сохранено')
 
-def game_load(canvas):
+def game_load(canvas, player1, player2):
     print('Загружаем игру')
     # 2
-    global x1, x2
     with open('save.dat', 'rb') as f:
         data = load(f)
-        x1, x2 = data
-        canvas.coords(player1, x1, y1, x1 + player_size,
-                      y1 + player_size)
-        canvas.coords(player2, x2, y2, x2 + player_size,
-                      y2 + player_size)
-        set_status('Загружено', color='yellow')
+        (x1,y1),(x2,y2) = data
+        canvas.coords(player1, x1, y1, x1 + 100,
+                      y1 + 100)
+        canvas.coords(player2, x2, y2, x2 + 100,
+                      y2 + 100)
+        print('Загружено')
 
 def menu_up(canvas):
     global menu_current_index

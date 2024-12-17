@@ -10,7 +10,7 @@ def key_handler(event):
     if event.keycode == KEY_DOWN:
         menu.menu_down(canvas)
     if event.keycode == KEY_ENTER:
-        menu.menu_enter(canvas)
+        menu.menu_enter(canvas, player1, player2)
 
     if game_over:
         return
