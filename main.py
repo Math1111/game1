@@ -5,12 +5,12 @@ def set_status(text, color='black'):
     canvas.itemconfig(text_id, text=text, fill=color)
 
 def key_handler(event):
-    #if event.keycode == KEY_UP:
-    #    menu_up()
-    #if event.keycode == KEY_DOWN:
-    #    menu_down()
-    #if event.keycode == KEY_ENTER:
-    #    menu_enter()
+    if event.keycode == KEY_UP:
+        menu.menu_up(canvas)
+    if event.keycode == KEY_DOWN:
+        menu.menu_down(canvas)
+    if event.keycode == KEY_ENTER:
+        menu.menu_enter(canvas)
 
     if game_over:
         return
