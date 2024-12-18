@@ -45,9 +45,9 @@ def game_resume():
 def game_save(canvas,player1,player2):
     print('Сохраняем игру')
     # 1
-    x1 =  canvas.coords(player1)[0]
-    x2 =  canvas.coords(player2)[0]
-    data = [x1, x2]
+    x1,y1 =  canvas.coords(player1)[:2]
+    x2,y2 =  canvas.coords(player2)[:2]
+    data = [(x1, y1), (x2, y2)]
     with open('save.dat', 'wb') as f:
         dump(data, f)
         print('Сохранено')
